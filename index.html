@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La última carta</title>
+
+<!--
+  =============================================================
+  Fuentes tipográficas.
+  Se cargan desde Google Fonts cuando hay conexión a internet.
+  Si el archivo se abre sin internet, el navegador usa
+  automáticamente las fuentes de reserva definidas en style.css
+  (Garamond / Georgia / cursiva del sistema), así que la carta
+  nunca se rompe por falta de conexión.
+  ============================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     GRANO DE PAPEL / TEXTURA GENERAL (decorativo, no interactivo)
+     ============================================================ -->
+<div class="paper-grain" aria-hidden="true"></div>
+
+<!-- ============================================================
+     PANTALLA 1 — SOBRE CERRADO
+     ============================================================ -->
+<section id="envelope-screen" class="screen">
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-letter-peek"></div>
+      <div class="envelope-seal" aria-hidden="true">
+        <svg viewBox="0 0 60 60" width="46" height="46">
+          <circle cx="30" cy="30" r="28" fill="var(--wax)"/>
+          <text x="30" y="38" text-anchor="middle" font-family="'Dancing Script', cursive" font-size="26" fill="var(--wax-light)">A</text>
+        </svg>
+      </div>
+    </div>
+
+    <p class="envelope-line envelope-line-1">Hay cosas que uno no sabe cómo terminar.</p>
+    <p class="envelope-line envelope-line-2">Así que decidí escribirlas.</p>
+
+    <button id="open-letter-btn" class="btn-open" type="button">Abrir carta</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     PANTALLA 2 — LA CARTA
+     ============================================================ -->
+<main id="letter-screen" class="screen" hidden>
+
+  <!-- Reproductor discreto de música -->
+  <div class="music-player" id="music-player">
+    <p class="music-caption">Una canción para este momento</p>
+    <div class="music-controls">
+      <button id="music-toggle" class="music-toggle" type="button" aria-label="Reproducir música">
+        <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" hidden><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+      </button>
+
+      <div class="music-info">
+        <!-- EDITAR AQUÍ: nombre de la canción -->
+        <span class="music-title" id="music-title">Cinnamon girl — Lana del Rey</span>
+        <div class="music-progress-row">
+          <span class="music-time" id="music-current">0:00</span>
+          <input type="range" id="music-seek" class="music-seek" min="0" max="100" value="0" step="0.1" aria-label="Progreso de la canción">
+          <span class="music-time" id="music-duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="music-volume">
+        <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/></svg>
+        <input type="range" id="music-volume" class="music-volume-slider" min="0" max="1" value="0.6" step="0.01" aria-label="Volumen">
+      </div>
+    </div>
+    <!-- Aviso si el navegador bloquea la reproducción automática -->
+    <button id="music-blocked-btn" class="music-blocked-btn" type="button" hidden>Reproducir música</button>
+    <!-- EDITAR AQUÍ: ruta del archivo de audio -->
+    <audio id="audio-el" preload="metadata" src="assets/audio/musica.mp3"></audio>
+  </div>
+
+  <article class="letter-page">
+
+    <header class="letter-head">
+      <p class="letter-to">Para ti Anahi</p>
+      <h1 class="letter-title">La última carta</h1>
+      <!-- EDITAR AQUÍ: fecha de la carta -->
+      <p class="letter-date" id="letter-date">13 de septiembre de 2026</p>
+    </header>
+
+    <!-- ============================================================
+         FOTOGRAFÍA PRINCIPAL — carta manuscrita
+         Reemplazar assets/images/carta.jpg por tu propia fotografía.
+         Si el archivo no existe, se muestra un marco vacío elegante.
+         ============================================================ -->
+    <figure class="photo-block photo-main">
+      <div class="photo-frame photo-frame-main">
+        <img
+          src="assets/images/carta.jpg"
+          alt="Fotografía de la carta escrita a mano"
+          class="photo-img"
+          id="img-carta"
+        >
+        <div class="photo-placeholder" id="placeholder-carta">
+          <span>tu carta<br>manuscrita</span>
+        </div>
+        <span class="photo-tape photo-tape-left" aria-hidden="true"></span>
+        <span class="photo-tape photo-tape-right" aria-hidden="true"></span>
+      </div>
+      <!-- EDITAR AQUÍ: subtítulo de la carta manuscrita -->
+      <figcaption class="photo-caption">Lo que nunca supe decirte frente a frente.</figcaption>
+    </figure>
+
+    <!-- ============================================================
+         TEXTO DE LA CARTA
+         ============================================================ -->
+    <div class="letter-body" id="letter-body">
+
+      <p>Para ti,</p>
+
+      <p>Quizá esta sea la carta que más me ha costado escribir.</p>
+
+      <p>No porque no sepa qué decir, sino porque sé exactamente qué quiero decir y, aun así, una parte de mí hubiera preferido no tener que decirlo.</p>
+
+      <p>Creo que hace un tiempo empecé a sentir que algo había cambiado.</p>
+
+      <p>Tus respuestas se fueron haciendo más distantes.<br>
+      Las conversaciones dejaron de sentirse iguales.<br>
+      A veces pasaban horas sin saber de ti, mientras yo seguía esperando ese mensaje que antes me hacía ilusión recibir.</p>
+
+      <p>Y sí, lo noté.</p>
+
+      <p>Quizá nunca me dijiste directamente que ya no tenías el mismo interés. Quizá simplemente empezaste a demostrarlo de otra manera.</p>
+
+      <p>Y creo que aprendí algo:</p>
+
+      <p>A veces las personas no necesitan decir que se están alejando.</p>
+
+      <p>Uno simplemente lo siente.</p>
+
+      <p>No te escribo esto para reclamarte por las veces que no respondiste, ni para decirte dónde estabas o con quién estabas hablando. No quiero convertir lo que alguna vez fue bonito en una discusión sobre mensajes, horas o conexiones.</p>
+
+      <p>Solo quiero ser sincero contigo.</p>
+
+      <p>Me dolió sentir que yo estaba intentando mantener algo que quizá tú ya habías dejado ir.</p>
+
+      <p>Y durante un tiempo seguí insistiendo.</p>
+
+      <p>Porque me importabas.</p>
+
+      <p>Porque todavía esperaba que las cosas volvieran a sentirse como antes.</p>
+
+      <p>Porque cuando alguien realmente te importa, uno suele encontrar muchas razones para quedarse, incluso cuando empieza a darse cuenta de que quizá ya no debería.</p>
+
+      <p>Pero también llega un momento en el que tienes que preguntarte cuánto tiempo quieres seguir esperando a alguien que ya no parece estar esperando por ti.</p>
+
+      <p>Y creo que ya encontré mi respuesta.</p>
+
+      <p class="letter-emphasis">Me voy.</p>
+
+      <p>No porque hayas dejado de importarme.</p>
+
+      <p>Precisamente porque me importaste demasiado como para terminar convirtiendo ese cariño en insistencia.</p>
+
+      <p>No quiero perseguir tu atención.</p>
+
+      <p>No quiero tener que preguntarme cada vez si hice algo mal.</p>
+
+      <p>No quiero medir mi importancia por cuánto tardas en responderme.</p>
+
+      <p>Y tampoco quiero convertirme en alguien que reclama un lugar en la vida de otra persona.</p>
+
+<p>Si ya no quieres estar, lo respeto.</p>
+
+<p>Aunque duela.<br>
+Aunque me cueste.<br>
+Aunque una parte de mí todavía quisiera que fuera diferente.</p>
+
+<p>Me quedo con lo bonito.</p>
+
+<p>Con las conversaciones que sí quisimos tener.</p>
+
+<p>Con las veces que me hiciste sonreír.</p>
+
+<p>Con todo aquello que me hizo pensar que quizá podía existir algo entre nosotros.</p>
+
+<p>Tal vez para otras personas fueron cosas simples, momentos sin demasiada importancia. Pero para mí significaron muchísimo.</p>
+
+<p>No voy a decir que no significó nada.</p>
+
+<p>Porque sí significó.</p>
+
+<p>Y para mí, significó muchísimo más de lo que quizá alguna vez llegaste a imaginar.</p>
+
+<p>Por eso no quiero terminar esto con odio.</p>
+
+<p>Quiero terminarlo como empezó:</p>
+
+<p>con cariño.</p>
+
+
+    </div>
+
+    <!-- ============================================================
+         SEGUNDA FOTOGRAFÍA — dibujo hecho a mano
+         Reemplazar assets/images/dibujo.jpg por tu propia fotografía.
+         ============================================================ -->
+    <figure class="photo-block photo-small">
+      <div class="photo-frame photo-frame-small">
+        <img
+          src="assets/images/dibujo.jpg"
+          alt="Fotografía de un dibujo hecho a mano"
+          class="photo-img"
+          id="img-dibujo"
+        >
+        <div class="photo-placeholder" id="placeholder-dibujo">
+          <span>tu dibujo</span>
+        </div>
+      </div>
+      <!-- EDITAR AQUÍ: subtítulo del dibujo -->
+      <figcaption class="photo-caption">Un pequeño recuerdo hecho con mis propias manos.</figcaption>
+    </figure>
+
+    <!-- Resto del texto, después del dibujo -->
+    <div class="letter-body letter-body-second">
+
+      <p>Quizá esta sea mi última forma de quererte:</p>
+
+      <p>Dejar de insistir.</p>
+
+      <p>Dejar de esperar.</p>
+
+      <p>Dejarte libre para encontrar a alguien a quien realmente quieras responderle, buscarle y tener cerca.(o quisas ya lo has encontrado, pero no eras capas de decirlmelo)</p>
+
+      <p>No te guardo rencor.</p>
+
+      <p>Solo estoy aprendiendo a aceptar que no puedo hacer que alguien tenga ganas de quedarse.</p>
+
+      <p>Y hoy creo que es momento de hacerlo.</p>
+
+      <p>Cuídate mucho.</p>
+
+      <p>Y ojala cumplas todo aquello que una ves me contaste, tus sueño y metas.</p>
+
+    </div>
+
+    <!-- ============================================================
+         FRASE ESPECIAL — manuscrita
+         ============================================================ -->
+    <p class="letter-motto">Lo que con amor/cariño/afecto empezó,<br>quiero que con amor/cariño/afecto termine.</p>
+
+    <!-- ============================================================
+         CIERRE
+         ============================================================ -->
+    <div class="letter-closing">
+      <p class="closing-line closing-line-1">Gracias por lo que fue.</p>
+      <p class="closing-line closing-line-2">Y adiós.</p>
+      <!-- EDITAR AQUÍ: firma -->
+      <p class="closing-signature" id="closing-signature">— Edwar Alama .</p>
+    </div>
+
+  </article>
+
+  <footer class="letter-footer" aria-hidden="true">
+    <span class="footer-rule"></span>
+  </footer>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
